@@ -23,10 +23,13 @@ You can install the package via composer:
 composer require 3pontos-tech/filament-consultants-module
 ```
 
-You can publish and run the migrations with:
+You can publish and run the migrations with, also we need to publish the ```Spatie``` migration:
 
 ```bash
 php artisan vendor:publish --tag="filament-consultants-module-migrations"
+
+php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-migrations"
+
 php artisan migrate
 ```
 
@@ -40,6 +43,16 @@ This is the contents of the published config file:
 
 ```php
 return [
+'consultants' => [ 
+            'models' => [
+                   'consultant' => Consultant::class,
+               ],
+            'database' => [
+                'table' => [
+                    'consultants' => 'consultants',
+                ]
+            ]
+    ]
 ];
 ```
 
@@ -50,10 +63,13 @@ php artisan vendor:publish --tag="filament-consultants-module-views"
 ```
 
 ## Usage
-
+To use the Filament Resource you must add the ```FilamentConsultantPlugin``` at your panel provider.
 ```php
-$consultant = new TresPontosTech\Consultant();
-echo $consultant->echoPhrase('Hello, TresPontosTech!');
+use TresPontosTech\Consultant\FilamentConsultantsPlugin;
+
+        ->plugins([
+               FilamentConsultantsPlugin::make(),
+            ])
 ```
 
 ## Testing

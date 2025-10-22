@@ -3,7 +3,7 @@
 namespace TresPontosTech\Consultant\Filament\Resources\Consultants\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
-use TresPontosTech\Consultants\Filament\Admin\Resources\Consultants\ConsultantResource;
+use TresPontosTech\Consultant\Filament\Resources\Consultants\ConsultantResource;
 
 class CreateConsultant extends CreateRecord
 {

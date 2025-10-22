@@ -1,6 +1,6 @@
 <?php
 
-namespace TresPontosTech\Consultants\Filament\Admin\Resources\Consultants\Tables;
+namespace TresPontosTech\Consultant\Filament\Resources\Consultants\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;

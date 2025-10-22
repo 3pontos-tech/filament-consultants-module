@@ -13,14 +13,16 @@ use TresPontosTech\Consultant\Core\Models\Consultant;
 use TresPontosTech\Consultant\Filament\Resources\Consultants\Pages\CreateConsultant;
 use TresPontosTech\Consultant\Filament\Resources\Consultants\Pages\EditConsultant;
 use TresPontosTech\Consultant\Filament\Resources\Consultants\Pages\ListConsultants;
-use TresPontosTech\Consultants\Filament\Admin\Resources\Consultants\Tables\ConsultantsTable;
-use TresPontosTech\Consultants\Filament\Resources\Consultants\Schemas\ConsultantForm;
+use TresPontosTech\Consultant\Filament\Resources\Consultants\Schemas\ConsultantForm;
+use TresPontosTech\Consultant\Filament\Resources\Consultants\Tables\ConsultantsTable;
+use UnitEnum;
 
 class ConsultantResource extends Resource
 {
     protected static ?string $model = Consultant::class;
+    protected static string | UnitEnum | null $navigationGroup = 'Consultants';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
     public static function form(Schema $schema): Schema
     {

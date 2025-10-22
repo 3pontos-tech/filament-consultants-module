@@ -43,8 +43,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "TresPontosTech\\Consultant\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/"
+            "TresPontosTech\\Consultant\\Tests\\": "tests/"
         }
     },
     "scripts": {

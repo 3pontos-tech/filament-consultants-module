@@ -6,7 +6,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
-use TresPontosTech\Consultants\Filament\Admin\Resources\Consultants\ConsultantResource;
+use TresPontosTech\Consultant\Filament\Resources\Consultants\ConsultantResource;
 
 class EditConsultant extends EditRecord
 {

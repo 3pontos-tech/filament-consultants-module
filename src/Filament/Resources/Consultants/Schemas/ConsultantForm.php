@@ -1,6 +1,6 @@
 <?php
 
-namespace TresPontosTech\Consultants\Filament\Resources\Consultants\Schemas;
+namespace TresPontosTech\Consultant\Filament\Resources\Consultants\Schemas;
 
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
