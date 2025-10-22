@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace TresPontosTech\Consultant\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class ConsultantCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-consultants-module';
 
     public $description = 'My command';
 
