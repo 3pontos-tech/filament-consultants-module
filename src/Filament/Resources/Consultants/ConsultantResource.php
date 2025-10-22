@@ -20,7 +20,8 @@ use UnitEnum;
 class ConsultantResource extends Resource
 {
     protected static ?string $model = Consultant::class;
-    protected static string | UnitEnum | null $navigationGroup = 'Consultants';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Consultants';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 

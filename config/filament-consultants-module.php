@@ -11,7 +11,7 @@ return [
         'database' => [
             'table' => [
                 'consultants' => 'consultants',
-            ]
-        ]
-    ]
+            ],
+        ],
+    ],
 ];

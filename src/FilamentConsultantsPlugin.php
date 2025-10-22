@@ -8,7 +8,6 @@ use TresPontosTech\Consultant\Filament\Resources\Consultants\ConsultantResource;
 
 class FilamentConsultantsPlugin implements Plugin
 {
-
     public static function make(): self
     {
         return app(self::class);
@@ -16,7 +15,7 @@ class FilamentConsultantsPlugin implements Plugin
 
     public function getId(): string
     {
-       return 'filament-consultants';
+        return 'filament-consultants';
     }
 
     public function register(Panel $panel): void
