@@ -13,5 +13,6 @@ return [
                 'consultants' => 'consultants',
             ],
         ],
+        'connection' => app()->isProduction() ? 'backoffice' : config('database.default'),
     ],
 ];
