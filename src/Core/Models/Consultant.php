@@ -34,7 +34,11 @@ class Consultant extends Model implements HasMedia
         'socials_urls' => 'array',
     ];
 
-    protected $connection = (string) config('filament-consultants-module.consultants.connection');
+    public function getConnectionName(): string
+    {
+        return config()->string('filament-consultants-module.consultants.connection');
+    }
+
 
     public function languages(): MorphToMany
     {
