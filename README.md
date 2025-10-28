@@ -1,69 +1,152 @@
-# :package_description
+# Filament Consultants Module
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
-## Support us
+A plug-and-play Filament module that adds a complete Consultant management experience to your Laravel + Filament admin. It ships with models, migrations, Filament resources, tables and forms so you can list, create, edit and tag consultants out of the box.
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
+- Laravel friendly: configurable models and table names
+- Filament plugin: enable it on any panel with one line
+- Uses [spatie/laravel-tags](https://github.com/spatie/laravel-tags) for consultant tags
+- Sensible defaults, easily customizable
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+> [!NOTE]
+> This is an internal package used inside TresPontosTech projects. It is not intended to be used outside of our company.
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+## Requirements
+- PHP and Laravel compatible with Filament (v3 recommended)
+- Filament Admin installed in your app
 
 ## Installation
-
-You can install the package via composer:
+Install the package via Composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require 3pontos-tech/filament-consultants-module
 ```
 
-You can publish and run the migrations with:
+### 1) Create the "backoffice" database connection (required)
+This package expects a dedicated database connection named `backoffice`.
+
+Add a new `backoffice` connection to your `config/database.php` and corresponding environment values.
+
+- Please add the "backoffice" connection inside your Laravel `config/database.php` file.
+
+Example `.env` entries:
+
+```env
+DB_BACKOFFICE_CONNECTION=mysql
+DB_BACKOFFICE_HOST=127.0.0.1
+DB_BACKOFFICE_PORT=3306
+DB_BACKOFFICE_DATABASE=backoffice
+DB_BACKOFFICE_USERNAME=root
+DB_BACKOFFICE_PASSWORD=
+```
+
+Example `config/database.php` snippet:
+
+```php
+'connections' => [
+    // ... your other connections
+
+    'backoffice' => [
+        'driver' => env('DB_BACKOFFICE_CONNECTION', 'mysql'),
+        'host' => env('DB_BACKOFFICE_HOST', '127.0.0.1'),
+        'port' => env('DB_BACKOFFICE_PORT', '3306'),
+        'database' => env('DB_BACKOFFICE_DATABASE', 'backoffice'),
+        'username' => env('DB_BACKOFFICE_USERNAME', 'root'),
+        'password' => env('DB_BACKOFFICE_PASSWORD', ''),
+        'unix_socket' => env('DB_SOCKET', ''),
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'prefix_indexes' => true,
+        'strict' => true,
+        'engine' => null,
+        'options' => extension_loaded('pdo_mysql') ? array_filter([
+            PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+        ]) : [],
+    ],
+],
+```
+
+> If you prefer to use your default connection, you can override the model or config accordingly. See Configuration below.
+
+### 2) Publish and run migrations
+This package includes its own migrations and relies on Spatie Tags migrations.
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
+php artisan vendor:publish --tag="filament-consultants-module-migrations"
+php artisan vendor:publish --provider="Spatie\Tags\TagsServiceProvider" --tag="tags-migrations"
 php artisan migrate
 ```
 
-You can publish the config file with:
+### 3) Publish the config (optional but recommended)
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-config"
+php artisan vendor:publish --tag="filament-consultants-module-config"
 ```
 
-This is the contents of the published config file:
+The published config looks like this (simplified):
 
 ```php
 return [
+    'consultants' => [
+        'models' => [
+            'consultant' => Consultant::class,
+        ],
+        'database' => [
+            'table' => [
+                'consultants' => 'consultants',
+            ],
+        ],
+    ],
 ];
 ```
 
-Optionally, you can publish the views using
+### 4) (Optional) Publish the views
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-views"
+php artisan vendor:publish --tag="filament-consultants-module-views"
 ```
 
-## Usage
+## Configuration
+- Model override: point `consultants.models.consultant` to your own model if you need custom logic or a different connection/table.
+- Table names: change `consultants.database.table.consultants` to suit your schema.
+- Database connection: if your app uses a non-default connection for consultants, set it on your custom model with:
 
 ```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+class Consultant extends Model
+{
+    protected $connection = 'backoffice';
+}
 ```
+
+## Filament integration
+Register the plugin on your Filament panel provider:
+
+```php
+use TresPontosTech\Consultant\FilamentConsultantsPlugin;
+
+// Inside your PanelProvider::panel() definition
+return $panel
+    ->plugins([
+        FilamentConsultantsPlugin::make(),
+    ]);
+```
+
+This will register the Consultants resource (forms, tables, pages) under your panel, allowing you to create, list and edit consultants.
+
+## Usage
+Once the plugin is enabled and migrations are run:
+- Navigate to your Filament panel
+- Open the Consultants resource
+- Create, edit, and tag consultants
+
+If you customized the model or table names, ensure your configuration matches your database.
+
+## Troubleshooting
+- Migration errors for tags: ensure you published Spatie Tags migrations and ran `php artisan migrate`.
+- Connection not found: double‑check that the `backoffice` connection exists in `config/database.php` and `.env`.
+- Class not found: verify that Composer autoload is up to date: `composer dump-autoload`.
 
 ## Testing
 
@@ -72,22 +155,12 @@ composer test
 ```
 
 ## Changelog
-
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
-
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
+- [Paula Araujo](https://github.com/pilsaraujo)
+- [Richard Greghi][https://github.com/richardgl11]
 
 ## License
-
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
