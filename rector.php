@@ -50,5 +50,5 @@ return RectorConfig::configure()
         ChangeOrIfContinueToMultiContinueRector::class,
         PostIncDecToPreIncDecRector::class,
         AddOverrideAttributeToOverriddenMethodsRector::class,
-        AddArrowFunctionReturnTypeRector::class
+        AddArrowFunctionReturnTypeRector::class,
     ]);

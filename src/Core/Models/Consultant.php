@@ -39,7 +39,6 @@ class Consultant extends Model implements HasMedia
         return config()->string('filament-consultants-module.consultants.connection');
     }
 
-
     public function languages(): MorphToMany
     {
         return $this->tags()
