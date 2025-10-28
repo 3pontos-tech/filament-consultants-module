@@ -9,7 +9,6 @@ use Filament\Support\Contracts\HasDescription;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Contracts\Support\Htmlable;
 
 enum AvailableTagsEnum: string implements HasColor, HasDescription, HasIcon, HasLabel
 {
@@ -31,12 +30,12 @@ enum AvailableTagsEnum: string implements HasColor, HasDescription, HasIcon, Has
         };
     }
 
-    public function getDescription(): string|Htmlable|null
+    public function getDescription(): string
     {
         return 'Campo para descrição';
     }
 
-    public function getIcon(): string|BackedEnum|null
+    public function getIcon(): BackedEnum
     {
         return match ($this) {
             self::Language => Heroicon::Language,
@@ -46,7 +45,7 @@ enum AvailableTagsEnum: string implements HasColor, HasDescription, HasIcon, Has
         };
     }
 
-    public function getLabel(): string|Htmlable|null
+    public function getLabel(): string
     {
         return match ($this) {
             self::Language => 'Idiomas',
