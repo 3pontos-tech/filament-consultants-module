@@ -17,7 +17,7 @@ class ConsultantsTable
     {
         return $table
             ->columns([
-                TextColumn::make('external_id')
+                TextColumn::make('provider_id')
                     ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
