@@ -12,7 +12,9 @@ return new class extends Migration {
         if (!Schema::connection($connection)->hasTable('consultants')) {
             Schema::connection($connection)->create(config('filament-consultants-module.consultants.database.tables.consultants', 'consultants'), function (Blueprint $table): void {
                 $table->id();
-                $table->string('external_id')->nullable();
+                $table->string('provider');
+                $table->string('provider_id')->nullable();
+                $table->boolean('enabled');
                 $table->string('name');
                 $table->string('slug');
                 $table->string('phone');

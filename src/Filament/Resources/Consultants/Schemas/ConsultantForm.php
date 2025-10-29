@@ -2,6 +2,7 @@
 
 namespace TresPontosTech\Consultant\Filament\Resources\Consultants\Schemas;
 
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -12,7 +13,7 @@ class ConsultantForm
     {
         return $schema
             ->components([
-                TextInput::make('external_id'),
+                TextInput::make('provider_id'),
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('slug')
@@ -26,10 +27,10 @@ class ConsultantForm
                     ->required(),
                 TextInput::make('short_description')
                     ->required(),
-                Textarea::make('biography')
+                RichEditor::make('biography')
                     ->required()
                     ->columnSpanFull(),
-                Textarea::make('readme')
+                RichEditor::make('readme')
                     ->required()
                     ->columnSpanFull(),
                 Textarea::make('socials_urls')
