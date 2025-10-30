@@ -20,7 +20,7 @@ enum ConsultantIntegrationProvider: string implements HasColor, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::GoHighLevel => 'Go High Level',
+            self::GoHighLevel => 'GoHighLevel',
         };
     }
 }
