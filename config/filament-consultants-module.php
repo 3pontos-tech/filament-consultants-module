@@ -1,6 +1,5 @@
 <?php
 
-
 use TresPontosTech\Consultant\Core\Models\Consultant;
 
 /*
