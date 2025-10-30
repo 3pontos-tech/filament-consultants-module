@@ -4,7 +4,6 @@ namespace TresPontosTech\Consultant\Filament\Resources\Consultants\Schemas;
 
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -20,6 +19,7 @@ class ConsultantForm
             'youtube' => '',
             'tiktok' => '',
         ];
+
         return $schema
             ->components([
                 TextInput::make('provider')

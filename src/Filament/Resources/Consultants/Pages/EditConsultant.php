@@ -20,7 +20,7 @@ class EditConsultant extends EditRecord
                 ->outlined()
                 ->color(fn ($record): string => $record->enabled ? 'danger' : 'success')
                 ->action(
-                    fn ($record) => $record->update(['enabled' => !$record->enabled])
+                    fn ($record) => $record->update(['enabled' => ! $record->enabled])
                 )
                 ->label(fn ($record): string => $record->enabled ? 'Desativar' : 'Ativar'),
             DeleteAction::make(),
