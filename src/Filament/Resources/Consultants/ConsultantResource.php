@@ -25,6 +25,21 @@ class ConsultantResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return config('filament-consultants-module.consultants.ui.navigation_group', 'Consultants');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return config('filament-consultants-module.consultants.ui.navigation_label', 'Consultants');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return config('filament-consultants-module.consultants.ui.label', 'Consultants');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ConsultantForm::configure($schema);

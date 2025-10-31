@@ -10,6 +10,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Tags\HasTags;
 use TresPontosTech\Consultant\Core\Enums\AvailableTagsEnum;
+use TresPontosTech\Consultant\Core\Enums\ConsultantIntegrationProvider;
 
 class Consultant extends Model implements HasMedia
 {
@@ -27,11 +28,14 @@ class Consultant extends Model implements HasMedia
         'biography',
         'readme',
         'socials_urls',
-        'external_id',
+        'provider',
+        'provider_id',
+        'enabled',
     ];
 
     protected $casts = [
         'socials_urls' => 'array',
+        'provider' => ConsultantIntegrationProvider::class,
     ];
 
     public function getConnectionName(): string

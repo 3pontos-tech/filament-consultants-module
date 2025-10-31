@@ -2,7 +2,8 @@
 
 namespace TresPontosTech\Consultant\Filament\Resources\Consultants\Schemas;
 
-use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -10,9 +11,21 @@ class ConsultantForm
 {
     public static function configure(Schema $schema): Schema
     {
+        $defaultSocialLinks = [
+            'facebook' => '',
+            'linkedin' => '',
+            'instagram' => '',
+            'twitter' => '',
+            'youtube' => '',
+            'tiktok' => '',
+        ];
+
         return $schema
             ->components([
-                TextInput::make('external_id'),
+                TextInput::make('provider')
+                    ->disabled(),
+                TextInput::make('provider_id')
+                    ->disabled(),
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('slug')
@@ -25,16 +38,23 @@ class ConsultantForm
                     ->email()
                     ->required(),
                 TextInput::make('short_description')
+                    ->columnSpanFull()
                     ->required(),
-                Textarea::make('biography')
+                RichEditor::make('biography')
                     ->required()
                     ->columnSpanFull(),
-                Textarea::make('readme')
+                RichEditor::make('readme')
                     ->required()
                     ->columnSpanFull(),
-                Textarea::make('socials_urls')
+                KeyValue::make('socials_urls')
                     ->required()
-                    ->default('[]')
+                    ->label('Socials')
+                    ->keyLabel('Social')
+                    ->addable(false)
+                    ->editableKeys(false)
+                    ->deletable(false)
+                    ->default($defaultSocialLinks)
+                    ->formatStateUsing(fn ($state) => empty($state) ? $defaultSocialLinks : $state)
                     ->columnSpanFull(),
             ]);
     }
